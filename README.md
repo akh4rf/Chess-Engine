@@ -1,4 +1,4 @@
-# Chess-Engine  
+# ChessEngine  
   
 This is my second GitHub repo! I really like playing chess, so I thought it would be fun to program  
 a chess engine that could beat me!    
