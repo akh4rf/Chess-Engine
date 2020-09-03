@@ -3,7 +3,8 @@ Main driver: handles user input & displays objects
 """
 
 import pygame as p
-from ChessEngine import engine
+from engine import GameState
+from engine import Move
 
 WIDTH = HEIGHT = 512
 DIMENSION = 8
@@ -23,7 +24,7 @@ def main():
     screen = p.display.set_mode((WIDTH,HEIGHT))
     clock = p.time.Clock()
     screen.fill(p.Color("white"))
-    gamestate = engine.GameState()
+    gamestate = GameState()
     loadImages()
     running = True
     selected_square = ()                                # Stores previously-clicked square
@@ -41,8 +42,9 @@ def main():
                     clicks = []                         # Clear clicks
                 else:
                     selected_square = (row, col)
+                    clicks.append(selected_square)
                 if (len(clicks) == 2):
-                    move = engine.Move(clicks[0], clicks[1], gamestate.board)
+                    move = Move(clicks[0], clicks[1], gamestate.board)
                     print(move.getChessNotation())
                     gamestate.makeMove(move)
                     selected_square = ()
