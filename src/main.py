@@ -6,6 +6,8 @@ import pygame as p
 from engine import GameState
 from engine import Move
 
+p.init()
+
 WIDTH = HEIGHT = 512
 DIMENSION = 8
 SQUARE_SIZE = WIDTH//8
@@ -20,7 +22,6 @@ def loadImages():
         IMAGES[piece] = p.transform.scale(p.image.load("assets/" + piece + ".png"), (SQUARE_SIZE,SQUARE_SIZE))
 
 def main():
-    p.init()
     screen = p.display.set_mode((WIDTH,HEIGHT))
     clock = p.time.Clock()
     screen.fill(p.Color("white"))
@@ -50,22 +51,26 @@ def main():
                     selected_square = ()
                     clicks = []
 
-        drawGameState(screen, gamestate)                # Draws screen every tick
+        drawGameState(screen, gamestate, selected_square)   # Draws screen every tick
         clock.tick(FPS)
-        p.display.flip()                                # Updates screen every tick
+        p.display.flip()                                    # Updates screen every tick
 
 ## Package the draw methods for the board and the pieces, and execute in that order ##
-def drawGameState(screen, gamestate):
-    drawBoard(screen)
+def drawGameState(screen, gamestate, selected):
+    drawBoard(screen, selected)
     drawPieces(screen, gamestate.board)
 
 ## Draw alternating colors for chessboard ##
-def drawBoard(screen):
+def drawBoard(screen, selected):
     colors = [p.Color("white"),p.Color("gray")]
     for r in range(DIMENSION):
         for c in range(DIMENSION):
-            color = colors[(r+c)%2]
-            p.draw.rect(screen, color, p.Rect(c*SQUARE_SIZE, r*SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
+            if (selected == (r,c)):
+                color = p.Color("red")
+                p.draw.rect(screen, color, p.Rect(c*SQUARE_SIZE, r*SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
+            else:
+                color = colors[(r+c)%2]
+                p.draw.rect(screen, color, p.Rect(c*SQUARE_SIZE, r*SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
 
 ## Draw pieces ##
 def drawPieces(screen, board):

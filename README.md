@@ -12,8 +12,11 @@ This is a basic chess engine I'm writing in Python.
 **Version 0.1**  
 Created the board, with alternating white/gray squares. No pieces yet.  
   
-**Version 0.2**  
-Created the pieces & made them move  
+**Version 0.2.0**  
+Created the pieces & made them move.  
   
+**Version 0.2.1**  
+Selected square now highlighted in red  
+    
 **Version 0.3 (In Progress)**  
 Work on valid moves  
